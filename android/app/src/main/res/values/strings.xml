@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">LIBAS</string>
+
+    <string name="username">Username</string>
+    <string name="Password">Password</string>
+    <string name="login">Login</string>
+
+    <string name="waktu">Hari / Tanggal : </string>
+    <string name="lokasi">Lokasi : </string>
+    <string name="temperatur">Temperatur Rata-Rata : </string>
+    <string name="kelembaban">Kelembaban Rata-Rata : </string>
+    <string name="curah_hujan">Curah Hujan : </string>
+    <string name="lama_penyinaran">Lama Penyinaran Matahari : </string>
+    <string name="kecepatan_angin">Kecepatan Angin Rata-Rata : </string>
+    <string name="prediksi">PREDIKSI</string>
+    <string name="parameter">Parameter</string>
+
+    <string name="merah">Berbahaya</string>
+    <string name="ijo">Aman</string>
+    <string name="none">-</string>
+
+    <string name="contoh_tanggal">Minggu / 30 Mei 2021</string>
+    <string name="contoh_angka">23</string>
+    <string name="contoh_lokasi">Jakarta</string>
+    <string name="contoh_prediksi">Aman</string>
+    <string name="fullname">Full Name</string>
+    <string name="email">Email</string>
+    <string name="age">Age</string>
+    <string name="register">Register</string>
+    <string name="register_user">Register</string>
+</resources>
