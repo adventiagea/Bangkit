@@ -50,17 +50,7 @@
         app:layout_constraintTop_toBottomOf="@+id/waktu_prediksi"
         app:layout_constraintVertical_bias="0.02" />
 
-    <TextView
-        android:id="@+id/lokasi_hasil"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/contoh_lokasi"
-        android:textColor="@color/login"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="@+id/lokasi_title"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/lokasi_title"
-        app:layout_constraintTop_toBottomOf="@+id/lokasi_title" />
+
 
     <LinearLayout
         android:id="@+id/parameter_area"
@@ -82,6 +72,7 @@
             android:id="@+id/temperatur_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:text="@string/temperatur"
             android:textColor="@color/login"
             android:textSize="12sp"
@@ -136,25 +127,6 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/sinar_matahari_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/lama_penyinaran"
-            android:textColor="@color/login"
-            android:textSize="12sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/sinar_matahari_hasil"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:text="@string/contoh_angka"
-            android:textColor="@color/login"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-        <TextView
             android:id="@+id/kecepatan_angin_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -174,6 +146,18 @@
             android:textStyle="bold" />
 
     </LinearLayout>
+    <TextView
+        android:id="@+id/lokasi_hasil"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/contoh_lokasi"
+        android:textColor="@color/login"
+        android:textSize="20sp"
+        android:background="@color/white"
+        app:layout_constraintEnd_toEndOf="@+id/lokasi_title"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/lokasi_title"
+        app:layout_constraintTop_toBottomOf="@+id/lokasi_title" />
 
     <LinearLayout
         android:id="@+id/prediksi_area"
@@ -214,5 +198,22 @@
             android:textSize="50sp" />
 
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/parameter"
+        style="@style/CardView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="224dp"
+        android:background="@color/white"
+        android:text=" Parameter "
+        android:textColor="@color/login"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/parameter_area"
+        app:layout_constraintEnd_toEndOf="@+id/parameter_area"
+        app:layout_constraintHorizontal_bias="0.032"
+        app:layout_constraintStart_toStartOf="@+id/parameter_area"
+        tools:ignore="HardcodedText" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

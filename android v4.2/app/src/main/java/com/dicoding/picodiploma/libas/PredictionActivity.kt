@@ -19,8 +19,10 @@ class PredictionActivity : AppCompatActivity() {
         val dateText = binding.waktuPrediksi
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val date = LocalDate.now()
-            val dateFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy")
-            dateText.text = dateFormat.format(date)
+            val dateFormat = DateTimeFormatter.ofPattern("EEEE / dd-MMMM-yyyy")
+            val dateTime = dateFormat.format(date)
+
+            dateText.text = dateTime
         } else {
             fun Date.toString(format : String, locale: Locale = Locale.getDefault()): String {
                 val dateFormat = SimpleDateFormat(format, locale)
@@ -31,7 +33,7 @@ class PredictionActivity : AppCompatActivity() {
             }
 
             val date = getCurrentDateTime()
-            val dateInString = date.toString("dd-MM-yyyy")
+            val dateInString = date.toString("dd-MMMM-yyyy")
 
             dateText.text = dateInString
         }
