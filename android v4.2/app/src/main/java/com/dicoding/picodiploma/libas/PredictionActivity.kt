@@ -11,6 +11,10 @@ import java.util.*
 
 class PredictionActivity : AppCompatActivity() {
     private lateinit var binding: ActivityPredictionBinding
+
+    companion object{
+        const val DETAIL_DATA = "Detail_Data"
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityPredictionBinding.inflate(layoutInflater)
@@ -38,5 +42,21 @@ class PredictionActivity : AppCompatActivity() {
             dateText.text = dateInString
         }
 
+        showData()
+
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
+    }
+
+    private fun showData(){
+        val variable: Variables = intent.getParcelableExtra(DETAIL_DATA)!!
+
+        binding.temperaturHasil.text = variable.temp.toString()
+        binding.kelembabanHasil.text = variable.humid.toString()
+        binding.curahHujanHasil.text = variable.rain.toString()
+        binding.kecepatanAnginHasil.text = variable.wind.toString()
     }
 }
