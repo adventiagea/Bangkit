@@ -60,8 +60,8 @@ class MainActivity : AppCompatActivity() {
                     )
                     variables.postValue(listVariable)
                 } catch (e: Exception) {
-                    Log.d("Exception Detail User", e.message.toString())
-                    Toast.makeText(context, "Exception Detail" + e.message.toString(), Toast.LENGTH_LONG).show()
+                    Log.d("Exception Detail Data", e.message.toString())
+                    Toast.makeText(context, "Exception Detail " + e.message.toString(), Toast.LENGTH_LONG).show()
                 }
             }
 
