@@ -12,6 +12,7 @@ import com.dicoding.picodiploma.libas.databinding.ActivityMainBinding
 import com.loopj.android.http.AsyncHttpClient
 import com.loopj.android.http.AsyncHttpResponseHandler
 import cz.msebera.android.httpclient.Header
+import org.json.JSONArray
 import org.json.JSONObject
 import java.lang.Exception
 
@@ -45,20 +46,24 @@ class MainActivity : AppCompatActivity() {
             ) {
                 try {
                     val result = String(responseBody!!)
-                    val jsonObject = JSONObject(result)
-                    val temp = jsonObject.getDouble("temp")
-                    val humid = jsonObject.getInt("humidity")
-                    val rain = jsonObject.getInt("clouds")
-                    val wind = jsonObject.getDouble("wind_speed")
-                    listVariable.add(
-                        Variables(
-                            temp,
-                            humid,
-                            rain,
-                            wind
+                    val jsonArray = JSONArray(result)
+                    for (i in 0 until jsonArray.length()){
+                        val jsonObject = jsonArray.getJSONObject(i)
+                        val temp = jsonObject.getDouble("temp")
+                        val humid = jsonObject.getInt("humidity")
+                        val rain = jsonObject.getInt("rain")
+                        val wind = jsonObject.getDouble("wind")
+                        listVariable.add(
+                            Variables(
+                                temp,
+                                humid,
+                                rain,
+                                wind
+                            )
                         )
-                    )
-                    variables.postValue(listVariable)
+                        variables.postValue(listVariable)
+                    }
+
                 } catch (e: Exception) {
                     Log.d("Exception Detail Data", e.message.toString())
                     Toast.makeText(context, "Exception Detail " + e.message.toString(), Toast.LENGTH_LONG).show()
