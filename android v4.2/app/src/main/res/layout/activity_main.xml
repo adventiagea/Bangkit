@@ -20,57 +20,17 @@
         app:layout_constraintVertical_bias="0.147"
         tools:ignore="ContentDescription" />
 
-    <LinearLayout
-        android:id="@+id/area_login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <EditText
-            android:id="@+id/username_login"
-            android:layout_width="350dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:background="@drawable/edit_text_box"
-            android:hint="@string/username"
-            android:textColorHint="@color/gray"
-            android:textColor="@color/login"
-            android:textSize="20sp"
-            android:importantForAutofill="no"
-            android:inputType="text"
-            android:padding="10dp" />
-
-        <EditText
-            android:id="@+id/password_login"
-            android:layout_width="350dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:background="@drawable/edit_text_box"
-            android:hint="@string/Password"
-            android:textColorHint="@color/gray"
-            android:textColor="@color/login"
-            android:textSize="20sp"
-            android:importantForAutofill="no"
-            android:inputType="textPassword"
-            android:padding="10dp" />
-
-    </LinearLayout>
 
     <ImageButton
         android:id="@+id/button_login"
-        android:layout_width="105dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="20dp"
+        android:layout_width="326dp"
+        android:layout_height="57dp"
+        android:layout_marginTop="240dp"
         android:background="@drawable/button_login"
-        app:layout_constraintEnd_toEndOf="@+id/area_login"
-        app:layout_constraintStart_toStartOf="@+id/area_login"
-        app:layout_constraintTop_toBottomOf="@+id/area_login"
+        app:layout_constraintEnd_toEndOf="@+id/logo_login"
+        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintStart_toStartOf="@+id/logo_login"
+        app:layout_constraintTop_toBottomOf="@+id/logo_login"
         tools:ignore="ContentDescription" />
 
     <TextView
@@ -78,8 +38,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/login"
+        android:textAlignment="center"
         android:textColor="@color/white"
-        android:textSize="20sp"
+        android:textSize="34sp"
         app:layout_constraintBottom_toBottomOf="@+id/button_login"
         app:layout_constraintEnd_toEndOf="@+id/button_login"
         app:layout_constraintStart_toStartOf="@+id/button_login"

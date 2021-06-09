@@ -46,10 +46,10 @@ class MainActivity : AppCompatActivity() {
                 try {
                     val result = String(responseBody!!)
                     val jsonObject = JSONObject(result)
-                    val temp = jsonObject.getInt("temp")
+                    val temp = jsonObject.getDouble("temp")
                     val humid = jsonObject.getInt("humidity")
                     val rain = jsonObject.getInt("clouds")
-                    val wind = jsonObject.getInt("wind_speed")
+                    val wind = jsonObject.getDouble("wind_speed")
                     listVariable.add(
                         Variables(
                             temp,
