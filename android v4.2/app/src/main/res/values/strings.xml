@@ -15,8 +15,8 @@
     <string name="prediksi">PREDIKSI</string>
     <string name="parameter">   Parameter   </string>
 
-    <string name="merah">Berbahaya</string>
-    <string name="ijo">Aman</string>
+    <string name="merah">Banjir</string>
+    <string name="ijo">Tidak Banjir</string>
     <string name="none">-</string>
 
     <string name="contoh_tanggal">Minggu / 30 Mei 2021</string>

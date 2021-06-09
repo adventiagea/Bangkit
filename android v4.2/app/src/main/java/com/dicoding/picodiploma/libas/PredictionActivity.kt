@@ -71,19 +71,29 @@ class PredictionActivity : AppCompatActivity() {
                     for (i in 0 until jsonArray.length()){
                         val jsonObject = jsonArray.getJSONObject(i)
                         val temp = jsonObject.getDouble("temp")
-                        val humid = jsonObject.getInt("humidity")
-                        val rain = jsonObject.getInt("rain")
+                        val humid = jsonObject.getDouble("humidity")
+                        val rain = jsonObject.getDouble("rain")
                         val wind = jsonObject.getDouble("wind")
+                        val predict = jsonObject.getDouble("predict")
 
                         val satuanWind = getText(R.string.satuan_wind)
                         val satuanTemp = getText(R.string.satuan_temp)
                         val satuanHumid = getText(R.string.satuan_humid)
                         val satuanRain = getText(R.string.satuan_rain)
+                        val banjir = getText(R.string.merah)
+                        val tidakBanjir = getText(R.string.ijo)
 
                         binding.curahHujanHasil.text = ("$rain $satuanRain")
                         binding.kecepatanAnginHasil.text = ("$wind $satuanWind")
                         binding.temperaturHasil.text = ("$temp $satuanTemp")
                         binding.kelembabanHasil.text = (humid.toString()+satuanHumid)
+
+                        if (predict > 70) {
+                            binding.prediksiHasil.text = banjir
+                        }
+                        else {
+                            binding.prediksiHasil.text = tidakBanjir
+                        }
                     }
 
                 } catch (e: Exception) {
