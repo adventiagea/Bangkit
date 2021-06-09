@@ -1,5 +1,6 @@
 package com.dicoding.picodiploma.libas
 
+import android.annotation.SuppressLint
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -60,6 +61,7 @@ class PredictionActivity : AppCompatActivity() {
         val url = "http://34.101.107.3"
 
         client.get(url, object: AsyncHttpResponseHandler(){
+            @SuppressLint("UseCompatLoadingForDrawables")
             override fun onSuccess(
                 statusCode: Int,
                 headers: Array<out Header>?,
@@ -82,6 +84,8 @@ class PredictionActivity : AppCompatActivity() {
                         val satuanRain = getText(R.string.satuan_rain)
                         val banjir = getText(R.string.merah)
                         val tidakBanjir = getText(R.string.ijo)
+                        val backgroundBanjir = getDrawable(R.drawable.merah)
+                        val backgroundTidakBanjir = getDrawable(R.drawable.ijo)
 
                         binding.curahHujanHasil.text = ("$rain $satuanRain")
                         binding.kecepatanAnginHasil.text = ("$wind $satuanWind")
@@ -90,9 +94,11 @@ class PredictionActivity : AppCompatActivity() {
 
                         if (predict > 70) {
                             binding.prediksiHasil.text = banjir
+                            binding.prediction.background = backgroundBanjir
                         }
                         else {
                             binding.prediksiHasil.text = tidakBanjir
+                            binding.prediction.background = backgroundTidakBanjir
                         }
                     }
 
