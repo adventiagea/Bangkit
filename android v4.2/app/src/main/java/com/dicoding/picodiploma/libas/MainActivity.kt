@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity() {
 
     fun getDetailData(context: Context){
         val client = AsyncHttpClient()
-        val url = "https://api.openweathermap.org/data/2.5/onecall?lat=-6.2146&lon=106.8451&exclude=minutely,daily&appid=00f4b30ea4e91d7ae367ad8a755601b7"
+        val url = "http://34.101.107.3"
 
         client.get(url, object: AsyncHttpResponseHandler(){
             override fun onSuccess(
