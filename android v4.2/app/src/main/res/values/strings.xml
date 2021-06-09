@@ -28,4 +28,6 @@
     <string name="satuan_humid">%</string>
     <string name="satuan_rain">mm</string>
     <string name="satuan_wind">m/s</string>
+    <string name="hasil">Hasil</string>
+    <string name="siaga_banjir">SIAGA BANJIR!</string>
 </resources>

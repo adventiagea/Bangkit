@@ -1,11 +1,16 @@
 package com.dicoding.picodiploma.libas
 
 import android.annotation.SuppressLint
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.content.Context
+import android.graphics.BitmapFactory
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.core.app.NotificationCompat
 import com.dicoding.picodiploma.libas.databinding.ActivityPredictionBinding
 import com.loopj.android.http.AsyncHttpClient
 import com.loopj.android.http.AsyncHttpResponseHandler
@@ -19,6 +24,12 @@ import java.util.*
 
 class PredictionActivity : AppCompatActivity() {
     private lateinit var binding: ActivityPredictionBinding
+
+    companion object{
+        private const val NOTIFICATION_ID = 1
+        private const val CHANNEL_ID = "channel_01"
+        private const val CHANNEL_NAME = "libas channel"
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -95,6 +106,26 @@ class PredictionActivity : AppCompatActivity() {
                         if (predict > 70) {
                             binding.prediksiHasil.text = banjir
                             binding.prediction.background = backgroundBanjir
+
+                            val mNotificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+                            val mBuilder = NotificationCompat.Builder(this@PredictionActivity, CHANNEL_ID)
+                                .setSmallIcon(R.drawable.ic_baseline_notifications_white_24)
+                                .setLargeIcon(BitmapFactory.decodeResource(resources, R.drawable.ic_baseline_notifications_white_24))
+                                .setContentTitle(resources.getString(R.string.prediksi))
+                                .setContentText(resources.getString(R.string.siaga_banjir))
+                                .setSubText(resources.getString(R.string.hasil))
+                                .setAutoCancel(true)
+
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+                                val channel = NotificationChannel(CHANNEL_ID, CHANNEL_NAME, NotificationManager.IMPORTANCE_DEFAULT)
+                                channel.description = CHANNEL_NAME
+
+                                mBuilder.setChannelId(CHANNEL_ID)
+                                mNotificationManager.createNotificationChannel(channel)
+                            }
+
+                            val notification = mBuilder.build()
+                            mNotificationManager.notify(NOTIFICATION_ID, notification)
                         }
                         else {
                             binding.prediksiHasil.text = tidakBanjir
