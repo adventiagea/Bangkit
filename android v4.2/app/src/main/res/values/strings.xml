@@ -23,4 +23,9 @@
     <string name="contoh_angka">23</string>
     <string name="contoh_lokasi">Jakarta</string>
     <string name="contoh_prediksi">Aman</string>
+
+    <string name="satuan_temp">°C</string>
+    <string name="satuan_humid">%</string>
+    <string name="satuan_rain">mm</string>
+    <string name="satuan_wind">m/s</string>
 </resources>

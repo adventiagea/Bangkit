@@ -1,26 +1,13 @@
 package com.dicoding.picodiploma.libas
 
-import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.ImageButton
-import android.widget.Toast
-import androidx.lifecycle.MutableLiveData
 import com.dicoding.picodiploma.libas.databinding.ActivityMainBinding
-import com.loopj.android.http.AsyncHttpClient
-import com.loopj.android.http.AsyncHttpResponseHandler
-import cz.msebera.android.httpclient.Header
-import org.json.JSONArray
-import org.json.JSONObject
-import java.lang.Exception
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-
-    private val listVariable = ArrayList<Variables>()
-    private val variables = MutableLiveData<ArrayList<Variables>>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,73 +16,7 @@ class MainActivity : AppCompatActivity() {
 
         val loginButton : ImageButton = findViewById(R.id.button_login)
         loginButton.setOnClickListener{
-            getDetailData(this)
-            bind(variable = Variables())
+            startActivity(Intent(this, PredictionActivity::class.java))
         }
-    }
-
-    fun getDetailData(context: Context){
-        val client = AsyncHttpClient()
-        val url = "http://34.101.107.3"
-
-        client.get(url, object: AsyncHttpResponseHandler(){
-            override fun onSuccess(
-                statusCode: Int,
-                headers: Array<out Header>?,
-                responseBody: ByteArray?
-            ) {
-                try {
-                    val result = String(responseBody!!)
-                    val jsonArray = JSONArray(result)
-                    for (i in 0 until jsonArray.length()){
-                        val jsonObject = jsonArray.getJSONObject(i)
-                        val temp = jsonObject.getDouble("temp")
-                        val humid = jsonObject.getInt("humidity")
-                        val rain = jsonObject.getInt("rain")
-                        val wind = jsonObject.getDouble("wind")
-                        listVariable.add(
-                            Variables(
-                                temp,
-                                humid,
-                                rain,
-                                wind
-                            )
-                        )
-                        variables.postValue(listVariable)
-                    }
-
-                } catch (e: Exception) {
-                    Log.d("Exception Detail Data", e.message.toString())
-                    Toast.makeText(context, "Exception Detail " + e.message.toString(), Toast.LENGTH_LONG).show()
-                }
-            }
-
-            override fun onFailure(
-                statusCode: Int,
-                headers: Array<out Header>?,
-                responseBody: ByteArray?,
-                error: Throwable?
-            ) {
-                val errMessage = when(statusCode) {
-                    401 -> "$statusCode : Bad Request"
-                    403 -> "$statusCode : Forbidden"
-                    404 -> "$statusCode : Not Found"
-                    else -> "$statusCode : ${error?.message.toString()}"
-                }
-                Log.d("onFailure Detail Data", error?.message.toString())
-                Toast.makeText(context, errMessage, Toast.LENGTH_LONG).show()
-            }
-        })
-    }
-
-    fun bind(variable: Variables){
-        val data = Variables(
-            variable.temp,
-            variable.humid,
-            variable.rain,
-            variable.wind)
-        val intent = Intent(this, PredictionActivity::class.java)
-        intent.putExtra(PredictionActivity.DETAIL_DATA, data)
-        startActivity(intent)
     }
 }

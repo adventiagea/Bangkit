@@ -5,9 +5,9 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class Variables(
-    var temp: Double? = 0.00,
-    var humid: Int? = 0,
-    var rain: Int? = 0,
-    var wind: Double? = 0.00
+    var temp: String? = "",
+    var humid: String? = "",
+    var rain: String? = "",
+    var wind: String? = ""
 ): Parcelable {
 }

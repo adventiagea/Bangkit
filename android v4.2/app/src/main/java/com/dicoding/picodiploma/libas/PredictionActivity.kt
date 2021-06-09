@@ -3,7 +3,14 @@ package com.dicoding.picodiploma.libas
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
 import com.dicoding.picodiploma.libas.databinding.ActivityPredictionBinding
+import com.loopj.android.http.AsyncHttpClient
+import com.loopj.android.http.AsyncHttpResponseHandler
+import cz.msebera.android.httpclient.Header
+import org.json.JSONArray
+import java.lang.Exception
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -12,9 +19,6 @@ import java.util.*
 class PredictionActivity : AppCompatActivity() {
     private lateinit var binding: ActivityPredictionBinding
 
-    companion object{
-        const val DETAIL_DATA = "Detail_Data"
-    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityPredictionBinding.inflate(layoutInflater)
@@ -42,7 +46,7 @@ class PredictionActivity : AppCompatActivity() {
             dateText.text = dateInString
         }
 
-        showData()
+        getDetailData()
 
     }
 
@@ -51,12 +55,58 @@ class PredictionActivity : AppCompatActivity() {
         return true
     }
 
-    private fun showData(){
-        val variable: Variables = intent.getParcelableExtra(DETAIL_DATA)!!
+    private fun getDetailData(){
+        val client = AsyncHttpClient()
+        val url = "http://34.101.107.3"
 
-        binding.temperaturHasil.text = variable.temp.toString()
-        binding.kelembabanHasil.text = variable.humid.toString()
-        binding.curahHujanHasil.text = variable.rain.toString()
-        binding.kecepatanAnginHasil.text = variable.wind.toString()
+        client.get(url, object: AsyncHttpResponseHandler(){
+            override fun onSuccess(
+                statusCode: Int,
+                headers: Array<out Header>?,
+                responseBody: ByteArray?
+            ) {
+                try {
+                    val result = String(responseBody!!)
+                    val jsonArray = JSONArray(result)
+                    for (i in 0 until jsonArray.length()){
+                        val jsonObject = jsonArray.getJSONObject(i)
+                        val temp = jsonObject.getDouble("temp")
+                        val humid = jsonObject.getInt("humidity")
+                        val rain = jsonObject.getInt("rain")
+                        val wind = jsonObject.getDouble("wind")
+
+                        val satuanWind = getText(R.string.satuan_wind)
+                        val satuanTemp = getText(R.string.satuan_temp)
+                        val satuanHumid = getText(R.string.satuan_humid)
+                        val satuanRain = getText(R.string.satuan_rain)
+
+                        binding.curahHujanHasil.text = ("$rain $satuanRain")
+                        binding.kecepatanAnginHasil.text = ("$wind $satuanWind")
+                        binding.temperaturHasil.text = ("$temp $satuanTemp")
+                        binding.kelembabanHasil.text = (humid.toString()+satuanHumid)
+                    }
+
+                } catch (e: Exception) {
+                    Log.d("Exception Detail Data", e.message.toString())
+                    Toast.makeText(this@PredictionActivity, "Exception Detail " + e.message.toString(), Toast.LENGTH_LONG).show()
+                }
+            }
+
+            override fun onFailure(
+                statusCode: Int,
+                headers: Array<out Header>?,
+                responseBody: ByteArray?,
+                error: Throwable?
+            ) {
+                val errMessage = when(statusCode) {
+                    401 -> "$statusCode : Bad Request"
+                    403 -> "$statusCode : Forbidden"
+                    404 -> "$statusCode : Not Found"
+                    else -> "$statusCode : ${error?.message.toString()}"
+                }
+                Log.d("onFailure Detail Data", error?.message.toString())
+                Toast.makeText(this@PredictionActivity, errMessage, Toast.LENGTH_LONG).show()
+            }
+        })
     }
 }
