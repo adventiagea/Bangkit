@@ -69,7 +69,7 @@ class PredictionActivity : AppCompatActivity() {
 
     private fun getDetailData(){
         val client = AsyncHttpClient()
-        val url = "http://34.101.107.3"
+        val url = "http://34.101.190.177/"
 
         client.get(url, object: AsyncHttpResponseHandler(){
             @SuppressLint("UseCompatLoadingForDrawables")
